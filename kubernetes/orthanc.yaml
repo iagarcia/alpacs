@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orthanc
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      role: orthanc
+  template:
+    metadata:
+      labels:
+        role: orthanc
+    spec:
+      containers:
+      - name: orthanc
+        image: jodogne/orthanc-plugins
+        ports:
+        - containerPort: 8042
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orthanc
+spec:
+  ports:
+  - port: 8042
+    targetPort: 8042
+  selector:
+    role: orthanc
