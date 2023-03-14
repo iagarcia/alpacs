@@ -8,7 +8,6 @@ import json
 from pprint import pprint
 import uuid
 
-
 def write_pem(der_bytes, type, file):
     file.write("-----BEGIN %s-----\n" % type)
     text = "\r\n".join(textwrap.wrap(base64.b64encode(der_bytes).decode('ascii'), 64))
@@ -41,13 +40,13 @@ def generate_pem(keystore, keypass, user):
     return "{}_cert.pem".format(user)
 
 class MirthConnectClient:
-    def __init__(self, IP, PORT, USER, PASSWORD, KEYSTORE, KEYPASS):
-        self.ip = IP
-        self.port = PORT
-        self.user = USER
-        self.password = PASSWORD
-        self.keystore = KEYSTORE
-        self.keypass = KEYPASS
+    def __init__(self, ip, port, user, password, keystore, keypass):
+        self.ip = ip
+        self.port = port
+        self.user = user
+        self.password = password
+        self.keystore = keystore
+        self.keypass = keypass
         return
 
     def start_connection(self):
