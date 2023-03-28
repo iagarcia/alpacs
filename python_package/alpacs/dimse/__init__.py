@@ -17,7 +17,7 @@ class DimseClient:
         ]
         for uid in storage_sop_classes:
             ae.add_supported_context(uid, ALL_TRANSFER_SYNTAXES)
-        scp = ae.start_server((self.ip, self.port), block=False, evt_handlers=handlers)
+        scp = ae.start_server((self.ip, self.port), ae_title=self.aet, block=False, evt_handlers=handlers)
         self.scp = scp
         return
     

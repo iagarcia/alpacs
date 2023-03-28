@@ -1,0 +1,19 @@
+{
+    "resourceType" : "DiagnosticReport",
+    "identifier": [
+        {
+            "use": "official",
+            "value": "GENERATE GUID"
+        }
+    ],
+    "status" : "registered",
+    "imagingStudy": [
+        {
+            "type": "ImagingStudy",
+            "identifier": {
+              "use": "official",
+              "value": "(0020,0010) StudyID"
+            }
+        }
+    ]
+}

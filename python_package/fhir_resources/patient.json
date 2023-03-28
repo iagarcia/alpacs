@@ -1,0 +1,22 @@
+{
+	"resourceType": "Patient",
+	"identifier": [{
+		"use": "official",
+		"value": "(0010,0020) PatientID"
+	}],
+	"active": true,
+	"name": [{
+		"use": "official",
+		"text": "(0010,0010) PatientName"
+	}],
+	"telecom": [{
+		"system": "phone",
+		"value": "(0010,2154) PatientTelephoneNumbers"
+	}],
+	"gender": "(0010,0040) PatientSex",
+	"birthDate": "(0010,0030) PatientBirthDate",
+	"address": [{
+		"use": "home",
+		"value": "(0010,1040) PatientAddress"
+	}]
+}

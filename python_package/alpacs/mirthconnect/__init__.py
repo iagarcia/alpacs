@@ -90,8 +90,8 @@ class MirthConnectClient:
                     'id': channels_raw['id'],
                     'name': channels_raw['name'],
                     'description': channels_raw['description'],
-                    'port': channels_raw['sourceConnector']['properties']['listenerConnectorProperties']['port'],
-                    'path': channels_raw['destinationConnectors']['connector']['properties']['host']
+                    'sourceConnector': channels_raw['sourceConnector'],
+                    'destinationConnectors': channels_raw['destinationConnectors']
                 })
             elif (type(channels_raw) == list):
                 for channel in channels_raw:
@@ -99,8 +99,8 @@ class MirthConnectClient:
                         'id': channel['id'],
                         'name': channel['name'],
                         'description': channel['description'],
-                        'port': channel['sourceConnector']['properties']['listenerConnectorProperties']['port'],
-                        'path': channel['destinationConnectors']['connector']['properties']['host']
+                        'sourceConnector': channel['sourceConnector'],
+                        'destinationConnectors': channel['destinationConnectors']
                     })
         json_data = json.dumps(channels, indent=2)
         return json_data
@@ -118,6 +118,29 @@ class MirthConnectClient:
         data_dict['channel']['description'] = "Inbound Channel - DICOM Listener/File Writer"
         data_dict['channel']['sourceConnector']['properties']['listenerConnectorProperties']['port'] = port
         data_dict['channel']['destinationConnectors']['connector']['properties']['host'] = path
+
+        encoded_data = json.dumps(data_dict).encode('utf-8')
+        response = self.connection.request(
+            'POST',
+            'https://{}:{}/api/channels'.format(self.ip, self.port),
+            headers=headers,
+            body=encoded_data)
+        return response
+    
+    def post_curated_channel(self, channel_xml, name, path, ip, port):
+        headers = {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'Authorization': 'Basic {}'.format(self.auth)}
+        
+        channel = open(channel_xml, "rb")
+        data_dict = xmltodict.parse(channel)
+        data_dict['channel']['id'] = str(uuid.uuid4())
+        data_dict['channel']['name'] = name
+        data_dict['channel']['description'] = "Curated Channel - File Reader/DICOM Sender"
+        data_dict['channel']['sourceConnector']['properties']['host'] = path
+        data_dict['channel']['destinationConnectors']['connector']['properties']['host'] = ip
+        data_dict['channel']['destinationConnectors']['connector']['properties']['port'] = port
 
         encoded_data = json.dumps(data_dict).encode('utf-8')
         response = self.connection.request(

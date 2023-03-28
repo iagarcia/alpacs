@@ -1,0 +1,47 @@
+{
+  "resourceType": "ImagingStudy",
+  "identifier": [
+    {
+      "use": "official",
+      "value": "(0020,0010) StudyID"
+    }
+  ],
+  "status": "available",
+  "modality": [
+    {
+      "use": "official",
+      "value": "(0008,0061) ModalitiesInStudy"
+    }
+  ],
+  "subject": {
+    "type": "Patient",
+    "identifier": {
+      "use": "official",
+      "value": "(0010,0020) PatientID"
+    }
+  },
+  "started": "(0008,0020) StudyDate",
+  "numberOfSeries": "(0020,1206) NumberOfStudyRelatedSeries",
+  "numberOfInstances": "(0020,1208) NumberOfStudyRelatedInstances",
+  "description": "(0008,1030) StudyDescription",
+  "series": [
+    {
+      "uid": "(0020,000E) SeriesInstanceUID",
+      "number": "(0020,0011) SeriesNumber",
+      "modality": "(0008,0060) Modality",
+      "descrtiption": "(0008,103E) SeriesDescription",
+      "bodySite": "(0018,0015) BodyPartExamined",
+      "started": "(0008,0021) SeriesDate",
+      "instance": [
+        {
+          "uid": "(0008,0018) SOPInstanceUID",
+          "sopClass": {
+              "display": "(0008,0016) SOPClassUID"
+          },
+          "number": "(0020,0013) InstanceNumber",
+          "title": "(0042,0010) DocumentTitle"
+        }
+      ]
+    }
+  ]
+}

@@ -44,3 +44,49 @@ class HapiFhirClient:
             body=encoded_data)
         json_data = json.loads(response.data.decode('utf-8')) 
         return json_data
+    
+    def get_imagingStudy(self):
+        headers = {
+            'accept': 'application/fhir+json'}
+        response = self.connection.request(
+            'GET',
+            'http://{}:{}/fhir/ImagingStudy'.format(self.ip, self.port),
+            headers=headers)
+        json_data = json.loads(response.data.decode('utf-8')) 
+        return json_data
+    
+    def post_imagingStudy(self, imagingStudy):
+        headers = {
+            'Content-Type': 'application/fhir+json',
+            'accept': 'application/fhir+json'}
+        encoded_data = json.dumps(imagingStudy).encode('utf-8')
+        response = self.connection.request(
+            'POST',
+            'http://{}:{}/fhir/ImagingStudy'.format(self.ip, self.port),
+            headers=headers,
+            body=encoded_data)
+        json_data = json.loads(response.data.decode('utf-8')) 
+        return json_data
+    
+    def get_diagnosticReport(self):
+        headers = {
+            'accept': 'application/fhir+json'}
+        response = self.connection.request(
+            'GET',
+            'http://{}:{}/fhir/DiagnosticReport'.format(self.ip, self.port),
+            headers=headers)
+        json_data = json.loads(response.data.decode('utf-8')) 
+        return json_data
+    
+    def post_diagnosticReport(self, diagnosticReport):
+        headers = {
+            'Content-Type': 'application/fhir+json',
+            'accept': 'application/fhir+json'}
+        encoded_data = json.dumps(diagnosticReport).encode('utf-8')
+        response = self.connection.request(
+            'POST',
+            'http://{}:{}/fhir/DiagnosticReport'.format(self.ip, self.port),
+            headers=headers,
+            body=encoded_data)
+        json_data = json.loads(response.data.decode('utf-8')) 
+        return json_data
